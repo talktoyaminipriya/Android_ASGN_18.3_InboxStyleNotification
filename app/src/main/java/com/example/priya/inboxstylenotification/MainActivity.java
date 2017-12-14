@@ -1,3 +1,4 @@
+
 package com.example.priya.inboxstylenotification;
 
 import android.app.Notification;
@@ -42,10 +43,12 @@ public class MainActivity extends AppCompatActivity {
 
         Intent resultIntent = new Intent(this, MainActivity.class);
         resultIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+        //pending intent 
         PendingIntent pendingIntent = PendingIntent.getActivity(this,
                 (int) Calendar.getInstance().getTimeInMillis(),resultIntent,0);
         NotificationCompat.InboxStyle inboxStyle = new NotificationCompat.InboxStyle();
 
+        // content into the notificantion text
         inboxStyle.setBigContentTitle("Inbox Notification");
         inboxStyle.addLine("Line 1");
         inboxStyle.addLine("Line 2");
@@ -53,13 +56,16 @@ public class MainActivity extends AppCompatActivity {
         inboxStyle.addLine("Line 4");
 
         inboxStyle.setSummaryText("+2 more");
+        
+        //Get an instance of NotificationManager
         NotificationCompat.Builder builder = (NotificationCompat.Builder) new NotificationCompat.Builder(this)
                 .setSmallIcon(R.mipmap.ic_launcher)
                 .setContentTitle("Inbox Style Notification")
                 .setContentText("This is test notification")
                 .setStyle(inboxStyle)
                 .addAction(R.mipmap.ic_launcher, "show activity",pendingIntent);
-
+        
+        // Gets an instance of the NotificationManager service//
         NotificationManager notificationManager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
         notificationManager.notify(0,builder.build());
     }
